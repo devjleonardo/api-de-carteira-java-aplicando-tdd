@@ -1,7 +1,5 @@
 package com.joseleonardo.carteira.repository;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.joseleonardo.carteira.entity.Usuario;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public interface UsuarioRepositoryTest {
+public class UsuarioRepositoryTest {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -26,7 +26,7 @@ public interface UsuarioRepositoryTest {
 		
 		Usuario resposta = usuarioRepository.save(usuario);
 
-		assertNotNull(resposta);
+		a(resposta);
 	}
 	
 }
