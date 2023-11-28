@@ -1,5 +1,7 @@
 package com.joseleonardo.carteira.repository;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class UsuarioRepositoryTest {
 		
 		Usuario resposta = usuarioRepository.save(usuario);
 
-		a(resposta);
+		assertNotNull(resposta);
 	}
 	
 }
