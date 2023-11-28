@@ -54,10 +54,12 @@ public class UsuarioRepositoryTest {
 		assertNotNull(usuarioSalvo);
 	}
 	
+	@Test
 	public void testBuscarPorEmail() {
 		Optional<Usuario> usuario = usuarioRepository.buscarPorEmail(EMAIL);
 		
 		assertTrue(usuario.isPresent());
+		
 		assertEquals(usuario.get().getEmail(), EMAIL);
 	}
 	
