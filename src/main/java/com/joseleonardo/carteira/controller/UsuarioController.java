@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.joseleonardo.carteira.dto.UsuarioDTO;
 import com.joseleonardo.carteira.entity.Usuario;
 import com.joseleonardo.carteira.response.Response;
 import com.joseleonardo.carteira.service.UsuarioService;
@@ -38,7 +39,7 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		usuario.setNome(dto.getNome());
 		usuario.setEmail(dto.getEmail());
-		usuario.setSenha(dto.setSenha());
+		usuario.setSenha(dto.getSenha());
 		
 		return usuario;
 	}
@@ -46,8 +47,8 @@ public class UsuarioController {
 	private UsuarioDTO convertEntityToDto(Usuario usuario) {
 		UsuarioDTO dto = new UsuarioDTO();
 		dto.setNome(usuario.getNome());
-		dto.setEmail(usuario);
-		dto.setSenha(usuario.setSenha());
+		dto.setEmail(usuario.getEmail());
+		dto.setSenha(usuario.getSenha());
 		
 		return dto;
 	}
