@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.joseleonardo.carteira.entity.Usuario;
+import com.joseleonardo.carteira.response.Response;
 import com.joseleonardo.carteira.service.UsuarioService;
 
 @RestController
