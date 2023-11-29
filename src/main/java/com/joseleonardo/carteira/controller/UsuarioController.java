@@ -26,7 +26,6 @@ public class UsuarioController {
 	@PostMapping
 	public ResponseEntity<Response<UsuarioDTO>> criar(
 			@Valid @RequestBody UsuarioDTO dto, BindingResult restul) {
-		
 		Usuario usuario = usuarioService.salvar(convertDtoToEntity(dto));
 		
 		Response<UsuarioDTO> response = new Response<UsuarioDTO>();

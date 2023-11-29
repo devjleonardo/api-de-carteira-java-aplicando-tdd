@@ -2,7 +2,10 @@ package com.joseleonardo.carteira.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +39,12 @@ public class UsuarioControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	@Test
 	public void testSalvar() throws Exception {
+		BDDMockito.given(
+				usuarioService.salvar(
+				    Mockito.any(Usuario.class))).willReturn(getMockUsuario());
+		
 		mockMvc.perform(MockMvcRequestBuilders.post(URL)
 				.content(getJsonPayload())
 				.contentType(MediaType.APPLICATION_JSON)
