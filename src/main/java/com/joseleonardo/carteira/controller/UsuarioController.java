@@ -25,10 +25,17 @@ public class UsuarioController {
 	
 	@PostMapping
 	public ResponseEntity<Response<UsuarioDTO>> criar(
-			@Valid @RequestBody UsuarioDTO dto, BindingResult restul) {
+			@Valid @RequestBody UsuarioDTO dto, BindingResult result) {
+		Response<UsuarioDTO> response = new Response<UsuarioDTO>();
+		
+		if (result.hasErrors()) {
+			result.getAllErrors().forEach(error -> response.addError(error.getDefaultMessage()));
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+		
 		Usuario usuario = usuarioService.salvar(convertDtoToEntity(dto));
 		
-		Response<UsuarioDTO> response = new Response<UsuarioDTO>();
 		response.setData(convertEntityToDto(usuario));
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -36,6 +43,7 @@ public class UsuarioController {
 	
 	private Usuario convertDtoToEntity(UsuarioDTO dto) {
 		Usuario usuario = new Usuario();
+		usuario.setId(dto.getId());
 		usuario.setNome(dto.getNome());
 		usuario.setEmail(dto.getEmail());
 		usuario.setSenha(dto.getSenha());
@@ -45,6 +53,7 @@ public class UsuarioController {
 	
 	private UsuarioDTO convertEntityToDto(Usuario usuario) {
 		UsuarioDTO dto = new UsuarioDTO();
+		dto.setId(usuario.getId());
 		dto.setNome(usuario.getNome());
 		dto.setEmail(usuario.getEmail());
 		dto.setSenha(usuario.getSenha());

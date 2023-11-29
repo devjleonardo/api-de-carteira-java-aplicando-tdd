@@ -1,5 +1,6 @@
 package com.joseleonardo.carteira.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -28,9 +29,10 @@ import com.joseleonardo.carteira.service.UsuarioService;
 @ActiveProfiles("test")
 public class UsuarioControllerTest {
 	
+	private static final Long ID = 1L;
 	private static final String NOME = "Usuario Test";
-	private static final String SENHA = "123456";
 	private static final String EMAIL = "email@teste.com";
+	private static final String SENHA = "123456";
 	private static final String URL = "/usuarios";
 	
 	@MockBean
@@ -40,20 +42,35 @@ public class UsuarioControllerTest {
 	private MockMvc mockMvc;
 	
 	@Test
-	public void testSalvar() throws Exception {
+	public void testSalvar() throws JsonProcessingException, Exception {
 		BDDMockito.given(
 				usuarioService.salvar(
 				    Mockito.any(Usuario.class))).willReturn(getMockUsuario());
 		
 		mockMvc.perform(MockMvcRequestBuilders.post(URL)
-				.content(getJsonPayload())
+				.content(getJsonPayload(ID, NOME, EMAIL, SENHA))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isCreated());
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.data.id").value(ID))
+				.andExpect(jsonPath("$.data.nome").value(NOME))
+				.andExpect(jsonPath("$.data.email").value(EMAIL))
+				.andExpect(jsonPath("$.data.senha").value(SENHA));
+	}
+	
+	@Test
+	public void testSalvarUsuarioInvalido() throws JsonProcessingException, Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post(URL)
+				.content(getJsonPayload(ID, NOME, "email", SENHA))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.errors[0]").value("Email inválido"));
 	}
 	
 	public Usuario getMockUsuario() {
 		Usuario usuario = new Usuario();
+		usuario.setId(ID);
 		usuario.setNome(NOME);
 		usuario.setEmail(EMAIL);
 		usuario.setSenha(SENHA);
@@ -61,11 +78,12 @@ public class UsuarioControllerTest {
 		return usuario;
 	}
 	
-	public String getJsonPayload() throws JsonProcessingException {
+	public String getJsonPayload(Long id, String nome, String email, String senha) throws JsonProcessingException {
 		UsuarioDTO dto = new UsuarioDTO();
-		dto.setNome(NOME);
-		dto.setEmail(EMAIL);
-		dto.setSenha(SENHA);
+		dto.setId(id);
+		dto.setNome(nome);
+		dto.setEmail(email);
+		dto.setSenha(senha);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		
