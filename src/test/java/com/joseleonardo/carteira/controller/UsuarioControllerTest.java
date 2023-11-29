@@ -45,21 +45,21 @@ public class UsuarioControllerTest {
 	public Usuario getMockUsuario() {
 		Usuario usuario = new Usuario();
 		usuario.setNome(NOME);
-		usuario.setSenha(SENHA);
 		usuario.setEmail(EMAIL);
+		usuario.setSenha(SENHA);
 		
 		return usuario;
 	}
 	
 	public String getJsonPayload() {
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setNome(NOME);
-		usuarioDTO.setSenha(SENHA);
-		usuarioDTO.setEmail(EMAIL);
+		UsuarioDTO dto = new UsuarioDTO();
+		dto.setNome(NOME);
+		dto.setEmail(EMAIL);
+		dto.setSenha(SENHA);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		
-		return objectMapper.writeValueAsString(usuarioDTO);
+		return objectMapper.writeValueAsString(dto);
 	}
 
 }

@@ -31,23 +31,23 @@ public class UsuarioRepositoryTest {
 	public void setUp() {
 		Usuario usuario = new Usuario();
 		usuario.setNome("Set up Usuario");
-		usuario.setSenha("Senha123");
 		usuario.setEmail(EMAIL);
+		usuario.setSenha("Senha123");
 		
 		usuarioRepository.save(usuario);
 	}
 	
 	@After
 	public void tearDown() {
-		usuarioRepository.deleteAll();
+		usuarioRepository.deleteAll();	
 	}
 	
 	@Test
 	public void testSalvar() {
 		Usuario novoUsuario = new Usuario();
 		novoUsuario.setNome("Teste");
-		novoUsuario.setSenha("123456");
 		novoUsuario.setEmail("teste@teste.com");
+		novoUsuario.setSenha("123456");
 		
 		Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
 
