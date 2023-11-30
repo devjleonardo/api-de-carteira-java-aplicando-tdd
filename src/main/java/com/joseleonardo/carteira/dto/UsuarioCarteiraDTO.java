@@ -10,9 +10,9 @@ public class UsuarioCarteiraDTO {
 	private Long id;
 	
 	@NotNull(message = "Informe o id do usuário")
-	private Long usuario;
+	private Long usuarioId;
 	
 	@NotNull(message = "Informe o id da carteira")
-	private Long carteira;
+	private Long carteiraId;
 	
 }
