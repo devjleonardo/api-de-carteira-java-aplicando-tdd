@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joseleonardo.carteira.dto.UsuarioDTO;
 import com.joseleonardo.carteira.entity.Usuario;
 import com.joseleonardo.carteira.response.Response;
+import com.joseleonardo.carteira.security.util.Bcrypt;
 import com.joseleonardo.carteira.service.UsuarioService;
 
 @RestController
@@ -46,7 +47,7 @@ public class UsuarioController {
 		usuario.setId(dto.getId());
 		usuario.setNome(dto.getNome());
 		usuario.setEmail(dto.getEmail());
-		usuario.setSenha(dto.getSenha());
+		usuario.setSenha(Bcrypt.getHash(dto.getSenha()));
 		
 		return usuario;
 	}
@@ -56,7 +57,6 @@ public class UsuarioController {
 		dto.setId(usuario.getId());
 		dto.setNome(usuario.getNome());
 		dto.setEmail(usuario.getEmail());
-		dto.setSenha(usuario.getSenha());
 		
 		return dto;
 	}
