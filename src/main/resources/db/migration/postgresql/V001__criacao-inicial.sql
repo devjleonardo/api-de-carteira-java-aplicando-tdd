@@ -16,11 +16,11 @@ create table carteira (
 
 create table usuario_carteira (
   id        serial,
-  usuario   integer,
-  carteira  integer,
+  usuario_id   integer,
+  carteira_id  integer,
   primary key (id),
-  foreign key (usuario) references usuario (id),
-  foreign key (carteira) references carteira (id)
+  foreign key (usuario_id) references usuario (id),
+  foreign key (carteira_id) references carteira (id)
 );
 
 create table carteira_itens (
