@@ -23,7 +23,7 @@ create table usuario_carteira (
   foreign key (carteira_id) references carteira (id)
 );
 
-create table carteira_itens (
+create table item_carteira (
   id         serial,
   carteira   integer,
   data       date,
