@@ -6,12 +6,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.joseleonardo.carteira.entity.enums.TipoItemCarteira;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +39,8 @@ public class ItemCarteira implements Serializable {
 	private Date data;
 	
 	@Column(nullable = false)
-	private String tipo;
+	@Enumerated(EnumType.STRING)
+	private TipoItemCarteira tipo;
 	
 	@Column(nullable = false)
 	private String descricao;
@@ -43,7 +48,7 @@ public class ItemCarteira implements Serializable {
 	@Column(nullable = false)
 	private BigDecimal valor;
 
-	public ItemCarteira(Carteira carteira, Date data, String tipo, String descricao, BigDecimal valor) {
+	public ItemCarteira(Carteira carteira, Date data, TipoItemCarteira tipo, String descricao, BigDecimal valor) {
 		this.carteira = carteira;
 		this.data = data;
 		this.tipo = tipo;

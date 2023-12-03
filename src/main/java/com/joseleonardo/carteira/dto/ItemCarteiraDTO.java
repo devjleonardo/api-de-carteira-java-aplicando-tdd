@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -21,6 +22,7 @@ public class ItemCarteiraDTO {
 	private Date data;
 
 	@NotNull(message = "Informe um tipo")
+	@Pattern(regexp = "^(ENTRADA|SAÍDA)$", message = "O tipo só aceita os valores ENTRADA ou SAÍDA")
 	private String tipo;
 
 	@NotNull(message = "Informe uma descrição")

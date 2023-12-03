@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.joseleonardo.carteira.entity.Carteira;
 import com.joseleonardo.carteira.entity.ItemCarteira;
+import com.joseleonardo.carteira.entity.enums.TipoItemCarteira;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,7 +23,7 @@ import com.joseleonardo.carteira.entity.ItemCarteira;
 public class ItemCarteiraRepositoryTest {
 
 	private static final Date DATA = new Date();
-	private static final String TIPO = "ENTRADA";
+	private static final TipoItemCarteira TIPO = TipoItemCarteira.EN;
 	private static final String DESCRICAO = "Conta de luz";
 	private static final BigDecimal VALOR = BigDecimal.valueOf(65);
 	
