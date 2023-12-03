@@ -1,5 +1,6 @@
 package com.joseleonardo.carteira.repository;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
@@ -26,6 +27,9 @@ public class ItemCarteiraRepositoryTest {
 	private static final BigDecimal VALOR = BigDecimal.valueOf(65);
 	
 	@Autowired
+	private CarteiraRepository carteiraRepository;
+	
+	@Autowired
 	private ItemCarteiraRepository itemCarteiraRepository;
 	
 	@Test
@@ -33,12 +37,21 @@ public class ItemCarteiraRepositoryTest {
 		Carteira carteira = new Carteira();
 		carteira.setNome("Carteria 1");
 		carteira.setValor(BigDecimal.valueOf(500));
+
+		carteiraRepository.save(carteira);
 		
 		ItemCarteira novoItemCarteira = new ItemCarteira(carteira, DATA, TIPO, DESCRICAO, VALOR);
 		
 		ItemCarteira itemCarteiraSalvo = itemCarteiraRepository.save(novoItemCarteira);
 		
 		assertNotNull(itemCarteiraSalvo);
+		
+		assertEquals(itemCarteiraSalvo.getData(), DATA);
+		assertEquals(itemCarteiraSalvo.getTipo(), TIPO);
+		assertEquals(itemCarteiraSalvo.getDescricao(), DESCRICAO);
+		assertEquals(itemCarteiraSalvo.getValor(), VALOR);
+		
+		assertEquals(itemCarteiraSalvo.getCarteira().getId(), carteira.getId());
 	}
 	
 }
