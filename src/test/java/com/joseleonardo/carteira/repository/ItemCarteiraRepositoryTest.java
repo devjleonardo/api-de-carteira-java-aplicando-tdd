@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.joseleonardo.carteira.entity.Carteira;
+import com.joseleonardo.carteira.entity.ItemCarteira;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
